@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
 export default {
-  payload: process.env.TOKEN_PAYLOAD,
+  secret: process.env.TOKEN_SECRET,
   expiresIn: process.env.TOKEN_EXPIRE,
 };
