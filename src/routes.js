@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import SessionController from './app/controllers/SessionController';
+import Recipient from './app/models/Recipient';
 
 import sessionAuthorizationMiddleware from './app/middlewares/sessionAuthorization';
 
@@ -10,8 +11,10 @@ routes.post('/sessions', SessionController.store);
 
 routes.use(sessionAuthorizationMiddleware);
 
-routes.get('/recipient', (req, res) => {
-  return res.json({ ok: true });
+routes.get('/recipients', async (req, res) => {
+  const recipient = await Recipient.findAll();
+
+  return res.json(recipient);
 });
 
 export default routes;
