@@ -32,6 +32,23 @@ class RecipientController {
 
     return res.json({ ok: 'Recipient registered successfully' });
   }
+
+  async update(req, res) {
+    const { name, street, number, complement, cep } = req.body;
+    const { id } = req.params;
+
+    const recipient = await Recipient.findByPk(id);
+
+    await recipient.update({
+      name,
+      street,
+      number,
+      complement,
+      cep,
+    });
+
+    return res.json({ ok: 'Recipient update successfully' });
+  }
 }
 
 export default new RecipientController();
