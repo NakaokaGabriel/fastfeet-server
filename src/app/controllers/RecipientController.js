@@ -63,6 +63,17 @@ class RecipientController {
 
     return res.json({ ok: 'Recipient update successfully' });
   }
+
+  async index(req, res) {
+    const { page } = req.query;
+
+    const recipient = await Recipient.findAll({
+      limit: 20,
+      offset: (page - 1) * 20,
+    });
+
+    return res.json(recipient);
+  }
 }
 
 export default new RecipientController();
