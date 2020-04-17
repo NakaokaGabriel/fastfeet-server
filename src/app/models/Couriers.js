@@ -16,9 +16,9 @@ class Couriers extends Model {
   }
 
   static associate(model) {
-    this.belongsTo(model.CourierAvatar, {
+    this.belongsTo(model.AvatarCourier, {
       foreignKey: 'avatar_id',
-      as: 'couriers_avatar',
+      as: 'avatar_couriers',
     });
   }
 }
