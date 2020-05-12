@@ -5,6 +5,7 @@ import courierMulter from './config/courierMulter';
 import SessionController from './app/controllers/SessionController';
 import RecipientController from './app/controllers/RecipientController';
 import AvatarCourierController from './app/controllers/AvatarCourierController';
+import CourierController from './app/controllers/CourierController';
 
 import sessionAuthorizationMiddleware from './app/middlewares/sessionAuthorization';
 
@@ -21,6 +22,7 @@ routes.post(
   upload.single('courier_file'),
   AvatarCourierController.store
 );
+routes.get('/couriers', CourierController.index);
 
 routes.post('/recipients', RecipientController.store);
 routes.put('/recipients/:id', RecipientController.update);
