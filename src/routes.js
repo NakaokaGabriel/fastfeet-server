@@ -23,6 +23,7 @@ routes.post(
   AvatarCourierController.store
 );
 routes.get('/couriers', CourierController.index);
+routes.post('/couriers', CourierController.store);
 
 routes.post('/recipients', RecipientController.store);
 routes.put('/recipients/:id', RecipientController.update);
