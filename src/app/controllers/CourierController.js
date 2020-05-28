@@ -48,6 +48,13 @@ class CourierController {
     const couriers = await Courier.findAll({
       limit: 20,
       offset: (page - 1) * 20,
+      include: [
+        {
+          model: AvatarCourier,
+          as: 'avatar_couriers',
+          attributes: ['id', 'name', 'path', 'url'],
+        },
+      ],
     });
 
     return res.json(couriers);
