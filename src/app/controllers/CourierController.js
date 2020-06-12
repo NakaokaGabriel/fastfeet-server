@@ -60,6 +60,24 @@ class CourierController {
     return res.json(couriers);
   }
 
+  async show(req, res) {
+    const { id } = req.params;
+
+    const courierExist = await Courier.findByPk(id);
+
+    if (!courierExist) {
+      return res.status(400).json({ error: 'Courier does not exist' });
+    }
+
+    const courier = await Courier.findOne({
+      where: {
+        id,
+      },
+    });
+
+    return res.json(courier);
+  }
+
   async update(req, res) {
     const { id } = req.params;
     const { name, email, avatar_id } = req.body;
