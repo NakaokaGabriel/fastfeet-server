@@ -24,6 +24,7 @@ routes.post(
 );
 routes.get('/couriers', CourierController.index);
 routes.post('/couriers', CourierController.store);
+routes.put('/couriers/:id', CourierController.update);
 
 routes.post('/recipients', RecipientController.store);
 routes.put('/recipients/:id', RecipientController.update);
