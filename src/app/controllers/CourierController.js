@@ -92,6 +92,20 @@ class CourierController {
 
     return res.json({ ok: 'This user was update with successfull' });
   }
+
+  async destroy(req, res) {
+    const { id } = req.params;
+
+    const courier = await Courier.findByPk(id);
+
+    if (!courier) {
+      return res.status(400).json({ error: 'Courier does not exist' });
+    }
+
+    await courier.destroy();
+
+    return res.json({ ok: 'This user was delete with successfully' });
+  }
 }
 
 export default new CourierController();
