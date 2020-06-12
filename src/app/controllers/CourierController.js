@@ -59,6 +59,21 @@ class CourierController {
 
     return res.json(couriers);
   }
+
+  async update(req, res) {
+    const { id } = req.params;
+    const { name, email, avatar_id } = req.body;
+
+    const courier = await Courier.findByPk(id);
+
+    await courier.update({
+      name,
+      email,
+      avatar_id,
+    });
+
+    return res.json({ ok: 'This user was update with successfull' });
+  }
 }
 
 export default new CourierController();
