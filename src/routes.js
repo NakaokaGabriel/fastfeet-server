@@ -6,6 +6,7 @@ import SessionController from './app/controllers/SessionController';
 import RecipientController from './app/controllers/RecipientController';
 import AvatarCourierController from './app/controllers/AvatarCourierController';
 import CourierController from './app/controllers/CourierController';
+import OrderController from './app/controllers/OrderController';
 
 import sessionAuthorizationMiddleware from './app/middlewares/sessionAuthorization';
 
@@ -33,5 +34,7 @@ routes.put('/recipients/:id', RecipientController.update);
 routes.delete('/recipients/:id', RecipientController.destroy);
 routes.get('/recipients', RecipientController.index);
 routes.get('/recipients/:id', RecipientController.show);
+
+routes.get('/order', OrderController.index);
 
 export default routes;
