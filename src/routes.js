@@ -7,6 +7,7 @@ import RecipientController from './app/controllers/RecipientController';
 import AvatarCourierController from './app/controllers/AvatarCourierController';
 import CourierController from './app/controllers/CourierController';
 import OrderController from './app/controllers/OrderController';
+import SignatureController from './app/controllers/SignatureController';
 
 import sessionAuthorizationMiddleware from './app/middlewares/sessionAuthorization';
 
@@ -34,6 +35,12 @@ routes.put('/recipients/:id', RecipientController.update);
 routes.delete('/recipients/:id', RecipientController.destroy);
 routes.get('/recipients', RecipientController.index);
 routes.get('/recipients/:id', RecipientController.show);
+
+routes.post(
+  '/signature',
+  upload.single('signature_files'),
+  SignatureController.store
+);
 
 routes.get('/order', OrderController.index);
 
