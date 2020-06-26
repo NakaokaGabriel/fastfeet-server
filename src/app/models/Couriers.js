@@ -20,6 +20,10 @@ class Couriers extends Model {
       foreignKey: 'avatar_id',
       as: 'avatar_couriers',
     });
+    this.belongsTo(model.Signature, {
+      foreignKey: 'signature_id',
+      as: 'signature',
+    });
   }
 }
 
