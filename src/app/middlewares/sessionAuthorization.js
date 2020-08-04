@@ -4,11 +4,11 @@ import { promisify } from 'util';
 import authConfig from '../../config/auth';
 
 export default async (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  const [, token] = authHeader.split(' ');
-
   try {
+    const authHeader = req.headers.authorization;
+
+    const [, token] = authHeader.split(' ');
+
     await promisify(verify)(token, authConfig.secret);
 
     return next();
