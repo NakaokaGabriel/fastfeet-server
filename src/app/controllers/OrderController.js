@@ -6,7 +6,7 @@ import Couriers from '../models/Couriers';
 
 class OrderController {
   async store(req, res) {
-    const { recipient, deliveryman, product, start_date, end_date } = req.body;
+    const { recipient, deliveryman, product, start_date } = req.body;
 
     const dateIsBefore = isAfter(parseISO(start_date), new Date());
 
@@ -62,6 +62,26 @@ class OrderController {
     const orders = await Order.findAll({
       limit: 20,
       offset: (page - 1) * 20,
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'complement',
+            'state',
+            'city',
+            'cep',
+          ],
+        },
+        {
+          model: Couriers,
+          as: 'courier',
+          attributes: ['id', 'name', 'email'],
+        },
+      ],
     });
 
     return res.json(orders);
