@@ -13,7 +13,7 @@ import sessionAuthorizationMiddleware from './app/middlewares/sessionAuthorizati
 
 const upload = multer(courierMulter);
 
-const routes = new Router();
+const routes = Router();
 
 routes.post('/sessions', SessionController.store);
 
@@ -46,5 +46,6 @@ routes.post('/orders', OrderController.store);
 routes.get('/orders', OrderController.index);
 routes.put('/orders/:id', OrderController.update);
 routes.delete('/orders/:id', OrderController.destroy);
+routes.get('/order/:id', OrderController.show);
 
 export default routes;

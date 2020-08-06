@@ -3,6 +3,7 @@ import { isAfter, parseISO, formatISO } from 'date-fns';
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
 import Couriers from '../models/Couriers';
+import AvatarCourier from '../models/AvatarCourier';
 
 class OrderController {
   async store(req, res) {
@@ -166,6 +167,48 @@ class OrderController {
     await orders.destroy();
 
     return res.json({ message: 'Order was destroy with successfull' });
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const order = await Order.findOne({
+      where: {
+        id,
+      },
+
+      include: [
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+            'cep',
+          ],
+        },
+        {
+          model: Couriers,
+          as: 'courier',
+          attributes: ['id', 'name', 'email', 'avatar_id'],
+        },
+      ],
+    });
+
+    if (!order) {
+      return res.status(400).json({ error: 'Order does not exist' });
+    }
+
+    const courierAvatarId = order.courier.avatar_id;
+
+    const courierAvatar = await AvatarCourier.findByPk(courierAvatarId);
+
+    return res.json({ order, courier_avatar: courierAvatar });
   }
 }
 
