@@ -153,6 +153,20 @@ class OrderController {
 
     return res.json(update);
   }
+
+  async destroy(req, res) {
+    const { id } = req.params;
+
+    const orders = await Order.findByPk(id);
+
+    if (!orders) {
+      return res.status(400).json({ error: 'Order does not exist' });
+    }
+
+    await orders.destroy();
+
+    return res.json({ message: 'Order was destroy with successfull' });
+  }
 }
 
 export default new OrderController();

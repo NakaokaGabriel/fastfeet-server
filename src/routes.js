@@ -45,5 +45,6 @@ routes.post(
 routes.post('/orders', OrderController.store);
 routes.get('/orders', OrderController.index);
 routes.put('/orders/:id', OrderController.update);
+routes.delete('/orders/:id', OrderController.destroy);
 
 export default routes;
